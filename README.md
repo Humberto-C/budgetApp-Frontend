@@ -2,9 +2,6 @@
 # budgetProject-Frontend
 This is Front End Repo for Budget Management Project for Core Code Full Stack BootCamp
 
-
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-
 ## Available Scripts
 
 In the project directory, you can run:
