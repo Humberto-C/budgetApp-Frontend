@@ -1,0 +1,13 @@
+body {
+    font-family: "Open Sans", sans-serif;
+    background: #f6f9ff;
+    color: #444444;
+}
+
+.loginContainer {
+    width: 90%;
+    height: 20em;
+    border: "solid 1px";
+    background-color: beige;
+    margin: auto;
+}
