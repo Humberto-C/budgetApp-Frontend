@@ -1,7 +1,9 @@
 body {
     font-family: "Open Sans", sans-serif;
-    background: #f6f9ff;
+    /* background: #f6f9ff; */
+    background-color: aliceblue;
     color: #444444;
+    font-family: 'Roboto', serif;
 }
 
 .libreFont {
@@ -21,6 +23,43 @@ body {
 
 input:invalid[focused="true"] ~ .error-msg {
     display: block;
+}
+
+.loginContainer, .signUpContainer {
+    height: 90vh; 
+    display: flex;
+    margin: auto; 
+    position: absolute; 
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.signUpCenter, .logInCenter {
+    margin: auto;
+}
+
+.signUpCard {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.signUpButton {
+    width: 12em;
+    align-self: center;
+}
+
+
+#day, #month, #year {
+    text-align: center;
+}
+
+#day, #month {
+    width: 3.5em;
+}
+
+#year { 
+    width: 5em;
 }
 
 /* .loginContainer {
@@ -44,3 +83,9 @@ input:invalid[focused="true"] ~ .error-msg {
     align-items: center;
         
 } */
+
+.footerLogIn {
+    margin: auto;
+    margin-bottom: 4px;
+    font-size: 15px;
+}

@@ -1,0 +1,70 @@
+
+
+.logoSize {
+    font-size: 2em;
+    text-decoration: none;
+    margin: auto;
+}
+
+.header {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+}
+
+.navbar-toggler{
+    color: black;
+    border: none;
+}
+
+.navbar-toggler-icon {
+    width: 1em;
+    height: 1em;
+}
+
+.navbar-toggler:focus {
+box-shadow: none;
+}
+
+.navIcons {
+    display: inline-block;
+    background-color: none;
+    color: black;
+    width: 1.4em;
+    margin: 0 10px;
+    padding-bottom: 6px;
+}
+
+
+.offcanvas {
+    padding-top: 65px;
+    max-width: 300px;
+    z-index:1020;
+    width: auto;
+}
+
+.offcanvas-body {
+    padding: 1em 0;
+}
+
+.offcanvas-body .navbar-nav {
+    height: 100%;
+    justify-content: space-between;
+    max-height: 400px;
+}
+
+.offcanvas-backdrop.show {
+    opacity: 0;
+    z-index:1010;
+}
+
+.nav-item :hover { 
+    background-color: aliceblue;
+    color: blue;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    color: black;
+}
+
+
