@@ -2,7 +2,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import Nav from 'react-bootstrap/Nav';
 import Container from 'react-bootstrap/Container';
-import { BriefcaseIcon, HomeIcon, LogoutIcon } from '@heroicons/react/solid'
+import { BriefcaseIcon, HomeIcon, LogoutIcon } from '@heroicons/react/solid';
 import { Link } from 'react-router-dom';
 import './header.css';
 

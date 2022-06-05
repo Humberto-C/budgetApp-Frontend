@@ -1,0 +1,54 @@
+.card {
+    width: 15vw;
+    min-width: 150px;
+    height: 100%;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0 2px 5px 0 ;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    border: 0;
+    background-color: rgba(0, 0, 0, 0);
+}
+
+.headerPlus {
+    justify-content: center;
+}
+
+.card-body {
+    margin: 0;
+    padding: 0;
+    /* border: 2px solid black; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-title{
+    color: rgba(11, 93, 215, 0.9);
+}
+
+/* Icons Styles */
+
+.dotsIcon {
+    position: inline-block;
+    width: 25px;
+}
+
+.dollarIcon {
+    position: inline-block;
+    width: 40px;
+    /* border: 1px solid black; */
+    padding: 0;
+    margin: 0;
+    padding-bottom: 4px;
+}
+
+.plusIcon {
+    position: inline-block;
+    width: 45px;
+}
+

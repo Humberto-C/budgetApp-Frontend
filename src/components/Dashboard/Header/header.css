@@ -1,5 +1,4 @@
 
-
 .logoSize {
     font-size: 2em;
     text-decoration: none;
@@ -36,9 +35,13 @@ box-shadow: none;
 
 .offcanvas {
     padding-top: 65px;
-    max-width: 300px;
     z-index:1020;
-    width: auto;
+    width: 13em;
+}
+
+.offcanvas-header {
+    max-width: 300px;
+    display: flex;
 }
 
 .offcanvas-body {
