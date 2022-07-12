@@ -1,4 +1,4 @@
-.card {
+.cardAccount {
     width: 15vw;
     min-width: 150px;
     height: 100%;
@@ -7,18 +7,21 @@
     box-shadow: 0 2px 5px 0 ;
 }
 
-.card-header {
+.headerAccount {
     display: flex;
     justify-content: space-between;
     border: 0;
     background-color: rgba(0, 0, 0, 0);
 }
 
-.headerPlus {
+.headerPlus{
+    display: flex;
     justify-content: center;
+    border: 0;
+    background-color: rgba(0, 0, 0, 0);
 }
 
-.card-body {
+.cardBodyAccount {
     margin: 0;
     padding: 0;
     /* border: 2px solid black; */
@@ -27,9 +30,23 @@
     align-items: center;
 }
 
-.card-title{
+.card-title {
     color: rgba(11, 93, 215, 0.9);
 }
+
+/* Button Three dots style on account card */
+.dotsAccountButton{
+    padding: 0;
+    margin: 0;
+    color: #000;
+    background-color: transparent;
+    border: none;
+}
+
+.dotsAccountButton:hover{
+    background-color: rgba(11, 93, 215, 0.9);
+}
+
 
 /* Icons Styles */
 
