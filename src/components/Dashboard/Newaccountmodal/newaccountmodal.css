@@ -1,0 +1,12 @@
+.newAccountButton{
+    padding: 0;
+    border-radius: 20px;
+}
+
+.newAccountButton:focus {
+    box-shadow: none;
+}
+
+.modal-header{
+    justify-content: center;
+}

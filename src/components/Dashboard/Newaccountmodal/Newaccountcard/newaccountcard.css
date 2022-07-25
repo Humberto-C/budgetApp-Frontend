@@ -1,0 +1,8 @@
+.currencyButton, .dropdown-menu{
+    width: 100%;
+    text-align: center;
+}
+
+.currencyButton{
+    border: 1px solid lightgray;
+}

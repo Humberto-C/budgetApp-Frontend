@@ -10,7 +10,7 @@ import './Transactionmodal.css';
 //import Card from 'react-bootstrap/Card';
 
 /* Components */
-import Addcard from '../Transactioncards/Addcard';
+import Transactioncard from './Transactioncards/Transactioncard';
 
 
 const Transactionmodal = (props) => {
@@ -29,7 +29,7 @@ const Transactionmodal = (props) => {
                 show={modalShow}
                 onHide={() => setModalShow(false)}
                 backdrop="static"
-                
+
             />
         </>
     )
@@ -50,22 +50,19 @@ const MyVerticallyCenteredModal = (props) => {
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-            <Tabs
-                    defaultActiveKey="profile"
-                    id="fill-tab-example"
+                <Tabs
+                    defaultActiveKey="add"
+                    className="mb-3 tabsModal"
                     fill
                 >
-                    <Tab eventKey="home" title="Home">
-                        <Addcard/>
+                    <Tab eventKey="add" title="Income">
+                        <Transactioncard add />
                     </Tab>
-                    <Tab eventKey="profile" title="Profile">
-
+                    <Tab eventKey="expense" title="Expense">
+                        <Transactioncard expense />
                     </Tab>
-                    <Tab eventKey="longer-tab" title="Loooonger Tab">
-
-                    </Tab>
-                    <Tab eventKey="contact" title="Contact">
-
+                    <Tab eventKey="transfer" title="Transfer">
+                        <Transactioncard transfer />
                     </Tab>
                 </Tabs>
             </Modal.Body>
@@ -78,7 +75,7 @@ const MyVerticallyCenteredModal = (props) => {
 
 // const Income = () => {
 //     return(
-        
+
 //     );
 // }
 

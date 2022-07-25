@@ -1,0 +1,36 @@
+
+.amountGroup{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.amountGroup label{
+    font-size: 2.5rem;
+    width: 15%;
+    padding-top: 10px;
+    text-align: end;
+    margin-right: 1rem;
+}
+
+.amountGroup input{
+    width:50%;
+    font-size: 2.5rem;
+}
+
+.amountGroup input::placeholder{
+    font-size: 2rem;   
+}
+
+.tranfer2row .col{
+    display: flex;
+    justify-content: center;
+}
+
+.transferIcon{
+    width: 2rem;
+}
+
+.transferCard .row .commentInput {
+    padding: 0 5%;
+}
