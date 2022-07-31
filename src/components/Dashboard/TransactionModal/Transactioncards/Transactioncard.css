@@ -34,3 +34,15 @@
 .transferCard .row .commentInput {
     padding: 0 5%;
 }
+
+
+.firstCategoryGroup .dropdown{
+    padding: 0 1rem;
+}
+
+
+/* First Category Button*/
+
+.firstCategoryGroup .dropdown-toggle{
+    width: 100%;
+}

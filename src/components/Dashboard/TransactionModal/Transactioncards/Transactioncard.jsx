@@ -1,6 +1,8 @@
 import { Card, Col, Dropdown, Form, Row } from "react-bootstrap";
+import DropdownButton from 'react-bootstrap/DropdownButton';
+import {getIncome, getExpense} from '../categoryData';
 import './Transactioncard.css';
-import { ArrowRightIcon } from '@heroicons/react/solid'
+import { ArrowRightIcon } from '@heroicons/react/solid';
 
 
 const Transactioncard = (props) => {
@@ -8,6 +10,7 @@ const Transactioncard = (props) => {
     const add = props.add;
     const expense = props.expense;
     const transfer = props.transfer;
+    const incomeCategories = getIncome();
 
     if(add){
         return (
@@ -28,16 +31,15 @@ const Transactioncard = (props) => {
                         </Row>
                         <Row >
                             <Col className="firstCategoryGroup">
-                                <Dropdown>
-                                    <Dropdown.Toggle>
-                                        Category
-                                    </Dropdown.Toggle>
+                                {/* <DropdownButton
+                                    title='Category'
+                                    drop="down"
+                                >
+                                     <Dropdown.Toggle>Category</Dropdown.Toggle>
                                     <Dropdown.Menu>
-                                        <Dropdown.Item href="#/action-1">Restaurant</Dropdown.Item>
-                                        <Dropdown.Item href="#/action-2">Transport</Dropdown.Item>
-                                        <Dropdown.Item href="#/action-3">Medicine</Dropdown.Item>
+                                        {incomeCategories.map((x, i) => <Dropdown.Item eventKey={i}>{x}</Dropdown.Item>)}   
                                     </Dropdown.Menu>
-                                </Dropdown>
+                                </DropdownButton> */}
                             </Col>
                         </Row>
                         <Row>
