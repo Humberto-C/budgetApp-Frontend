@@ -52,7 +52,6 @@ const Login = () => {
                                     <Form.Control required
                                         type="email"
                                         pattern="^([\da-z_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$"
-                                        placeholder="Email"
                                         value={user.email} onChange={handleChange} onBlur={handleFocus}
                                         focused={focused.email.toString()}
                                     />
@@ -61,8 +60,7 @@ const Login = () => {
                                 <Form.Group>
                                     <Form.Label>Password: </Form.Label>
                                     <Form.Control required
-                                        type="password"
-                                        placeholder="Password"
+                                        type="password"                                        
                                         value={user.password} onChange={handleChange}
                                     />
                                     <span className="error-msg">* Wrong password</span>

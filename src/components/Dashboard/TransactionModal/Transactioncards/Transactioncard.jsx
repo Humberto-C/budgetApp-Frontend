@@ -35,7 +35,7 @@ const Transactioncard = (props) => {
                                     title='Category'
                                     drop="down"
                                 >
-                                     <Dropdown.Toggle>Category</Dropdown.Toggle>
+                                     <Dropdown.Toggle></Dropdown.Toggle>
                                     <Dropdown.Menu>
                                         {incomeCategories.map((x, i) => <Dropdown.Item eventKey={i}>{x}</Dropdown.Item>)}   
                                     </Dropdown.Menu>

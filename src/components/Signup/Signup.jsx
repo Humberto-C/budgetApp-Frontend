@@ -55,7 +55,7 @@ const Signup = () => {
                                         <Form.Control.Feedback type="invalid">* No match</Form.Control.Feedback>
                                     </Col>
                                 </Row>
-                                <Stack> 
+                                <Stack className="mt-4"> 
                                     <Button className="signUpButton" type="submit" variant="primary" >Sign Up</Button>
                                 </Stack>
                             </Form>
