@@ -9,28 +9,81 @@ import Col from 'react-bootstrap/Col';
 import { Link } from "react-router-dom";
 
 
-const Login = () => {
+const Login = (props) => {
 
-    const [focused, setFocused] = useState({ email: false });
+    /* Variables */
+    const isAuth = props.isAuth;
     const [user, setUser] = useState(
         {
             email: '',
-            text: '',
-            validEmail: false,
-            validPassword: false
+            password: '',
+            focused: false,
+            validEmail: true,
+            validPassword: true,
         }
     );
 
-    const handleFocus = (event) => {
-        let type = event.target.type;
-        setFocused(prevState => ({ ...prevState, [type]: true }));
+
+    /* Handlers */
+    const handleBlur = () => {
+        setUser(prevState => ({ ...prevState, 'focused': true }));
     }
 
-    const handleLogIn = (event) => {
+    const handleLogIn = async (event) => {
         event.preventDefault();
+        try {
+            const req = await fetch(`${process.env.REACT_APP_BACKEND_URL}/login`, {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(
+                    {
+                        email: user.email,
+                        password: user.password,
+                    }
+                )
+            });
+
+            const res = await req.json();
+
+ 
+            if (res.token) {
+                localStorage.setItem('token', res.token);
+                isAuth(true);
+            } else {
+
+                if (res.toLowerCase().includes('password')) {
+                    setUser(prevState => (
+                        { ...prevState, 'validPassword': false }
+                    ));
+                }
+                if (res.toLowerCase().includes('email')) {
+                    setUser(prevState => (
+                        { ...prevState, 'validEmail': false }
+                    ));
+                }
+            }
+
+
+
+        } catch (error) {
+            console.log(error.message);
+        }
+
     }
 
     const handleChange = (event) => {
+        if (user.validPassword === false) {
+            setUser(prevState => (
+                { ...prevState, 'validPassword': true }
+            ));
+        }
+        if (user.validEmail === false) {
+            setUser(prevState => (
+                { ...prevState, 'validEmail': true }
+            ));
+        }
         let { type, value } = event.target;
         setUser(prevState => (
             { ...prevState, [type]: value }
@@ -50,26 +103,30 @@ const Login = () => {
                                 <Form.Group>
                                     <Form.Label>Email address: </Form.Label>
                                     <Form.Control required
+                                        //{user.validEmail ? valid : invalid}
                                         type="email"
-                                        pattern="^([\da-z_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$"
-                                        value={user.email} onChange={handleChange} onBlur={handleFocus}
-                                        focused={focused.email.toString()}
+                                        pattern="^([\da-zA-Z_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$"
+                                        value={user.email} onChange={handleChange} onBlur={handleBlur}
+                                        focused={user.focused.toString()}
+                                        validemail={user.validEmail.toString()}
                                     />
-                                    <span className="error-msg">* Email is not valid</span>
+                                    <span className="error-msg-email">* There is no account with this email!</span>
                                 </Form.Group><br />
                                 <Form.Group>
                                     <Form.Label>Password: </Form.Label>
                                     <Form.Control required
-                                        type="password"                                        
-                                        value={user.password} onChange={handleChange}
+                                        type="password"
+                                        value={user.password}
+                                        onChange={handleChange}
+                                        validpassword={user.validPassword.toString()}
                                     />
-                                    <span className="error-msg">* Wrong password</span>
+                                    <span className="error-msg-password">* Wrong password</span>
                                 </Form.Group><br />
-                                <Stack  gap={3}>
+                                <Stack gap={3}>
                                     <Button type="submit" variant="primary" >Log In</Button>
                                     <div className="footerLogIn">
                                         <span>Does not have an account?  </span>
-                                        <Link to="signup">Sign Up</Link>
+                                        <Link to="/signup">Sign Up</Link>
                                     </div>
                                 </Stack>
                             </Form>

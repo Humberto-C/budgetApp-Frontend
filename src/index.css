@@ -15,14 +15,26 @@ body {
     font-size: 4em;
 }
 
-.error-msg {
+.error-msg-email, .error-msg-password {
     font-size: 12px;
     padding: 3px;
     color: red;
     display: none;
 }
 
-input:invalid[focused="true"] ~ .error-msg {
+/* input:invalid[focused="false"] ~ .error-msg {
+    display: block;
+} */
+
+input:invalid[focused='true'] ~ .error-msg-email {
+    display: block;
+}
+
+input:valid[validemail='false'] ~ .error-msg-email {
+    display: block;
+}
+
+input:valid[validpassword='false'] ~ .error-msg-password {
     display: block;
 }
 

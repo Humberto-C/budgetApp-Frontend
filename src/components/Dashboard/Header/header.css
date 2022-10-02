@@ -70,4 +70,8 @@ box-shadow: none;
     color: black;
 }
 
-
+.btn-light, .btn-light:focus{
+    box-shadow: none;
+    text-decoration: none; 
+    color: #000;
+}

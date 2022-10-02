@@ -2,12 +2,15 @@ import Navbar from 'react-bootstrap/Navbar';
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import Nav from 'react-bootstrap/Nav';
 import Container from 'react-bootstrap/Container';
+import Button from 'react-bootstrap/Button';
 import { BriefcaseIcon, HomeIcon, LogoutIcon } from '@heroicons/react/solid';
 import { Link } from 'react-router-dom';
 import './header.css';
 
 
-const Header = ({ user }) => {
+const Header = (props) => {
+
+  const logout = props.logout;
 
   return (
     <>
@@ -19,7 +22,7 @@ const Header = ({ user }) => {
         <Navbar.Offcanvas backdrop={false}>
           <Offcanvas.Header className='justify-content-center'>
             <Offcanvas.Title>
-              <span>Welcome {user}</span>
+              <span>Welcome {props.user}</span>
             </Offcanvas.Title>
           </Offcanvas.Header>
           <Offcanvas.Body>
@@ -33,7 +36,7 @@ const Header = ({ user }) => {
                 </Nav.Item>
               </div>
               <Nav.Item className='offCanvas_logout'>
-                <Nav.Link><LogoutIcon className='navIcons' />Sign Out</Nav.Link>
+                <Nav.Link><Button className="btn btn-link btn-light .navIcons" onClick={logout}><LogoutIcon className='navIcons' />Sign Out</Button></Nav.Link>
               </Nav.Item>
             </Nav>
           </Offcanvas.Body>

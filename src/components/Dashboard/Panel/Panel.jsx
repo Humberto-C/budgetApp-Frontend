@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -12,9 +12,40 @@ import { PureComponent } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 
-const Panel = () => {
+const Panel = (props) => {
 
+    const [name, setName] = useState('');
+
+    const isAuth = props.isAuth;
+    
     // Chart Code
+
+    const getName = async () => {
+        try {
+            
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/dashboard`,{
+                method: 'GET',
+                headers: { token: localStorage.token }
+            });
+
+            const parseRes = await response.json();
+            console.log(parseRes.first_name);
+            setName(parseRes.first_name);
+
+        } catch (error) {
+            console.error(error);
+        }
+    }
+
+    useEffect(() => {
+        getName();
+    }, []);
+
+    const logout = (e) => {
+        e.preventDefault();
+        localStorage.removeItem('token');
+        isAuth(false);
+    };
 
     const data = [
         {
@@ -63,7 +94,7 @@ const Panel = () => {
 
     return (
         <div className='main'>
-            <Header />
+            <Header  logout={logout} user={name}/>
             <Container className='accountsContainer'>
                 <Row className='accountsRow'>
                     <Col xs={6} md='auto' lg='auto' className='cards'><Accountcard /></Col>
@@ -74,7 +105,7 @@ const Panel = () => {
             </Container>
             <Container className='chartContainer'>
                 <div className='lastMovesContainer'>
-                    <table class="table table-dark">
+                    <table className="table table-dark">
                         <thead>
                             <tr>
                                 <th>Firstname</th>
