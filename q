@@ -1,0 +1,107 @@
+[33mcommit 1a9f2c8479117cfb52478ca0f4aa99d1bca3d8a7[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Jesus Chavez <jhco1960@gmail.com>
+Date:   Sun Oct 2 15:28:51 2022 -0600
+
+    Login and Signup completed
+
+[33mcommit bc836eea6cf693004aa89c4eac2dced45d482a0f[m
+Author: Jesus Chavez <jhco1960@gmail.com>
+Date:   Wed Aug 17 15:02:48 2022 -0600
+
+    Table and chart added
+
+[33mcommit 7da49a541ec46a3bcb06778c75f13e59a66a8423[m
+Author: Jesus Chavez <jhco1960@gmail.com>
+Date:   Sat Jul 30 19:13:56 2022 -0600
+
+    07/30
+
+[33mcommit 20a3af83fa6dafff8497c734ae0a3506d953031c[m
+Author: Jesus Chavez <jhco1960@gmail.com>
+Date:   Sun Jul 24 19:51:14 2022 -0600
+
+    07/24
+
+[33mcommit 42c2f9621149280d362aec7f75a4eb7b8c5a4215[m
+Author: Jesus Chavez <jhco1960@gmail.com>
+Date:   Fri Jul 15 16:07:44 2022 -0600
+
+    Transactions cards
+
+[33mcommit 889c80b8a6d0b92632112635e030fd418709a205[m
+Author: Jesus Chavez <jhco1960@gmail.com>
+Date:   Tue Jul 12 16:24:16 2022 -0600
+
+    Loaded from Ubuntu new machine
+
+[33mcommit de08850ba70ed2c0fac103f6767c09da126d864f[m
+Author: Jesus Chavez <jhco1960@gmail.com>
+Date:   Sun Jun 5 00:10:25 2022 -0600
+
+    dashboard layout with account cards
+
+[33mcommit 5e45a7abd6d56da3d7bb5a852321b8c5d0824509[m
+Author: Jesus Chavez <jhco1960@gmail.com>
+Date:   Tue May 17 05:26:35 2022 -0600
+
+    SignUp Component
+
+[33mcommit 38ef70b3e886169619486f8ac2271342834ef1c9[m
+Author: Jesus Chavez <jhco1960@gmail.com>
+Date:   Mon May 9 21:54:35 2022 -0600
+
+    Login Component
+
+[33mcommit 4cc18e9979712063ce3f13f12aa6142857731d44[m
+Author: Humberto-C <72180767+Humberto-C@users.noreply.github.com>
+Date:   Sat May 7 16:03:40 2022 -0600
+
+    Update README.md
+
+[33mcommit af87f5913aeb602d9ab2eec77f92642229e1621b[m
+Author: Humberto-C <72180767+Humberto-C@users.noreply.github.com>
+Date:   Sat May 7 16:03:14 2022 -0600
+
+    Update README.md
+
+[33mcommit aa80c14238bc95a09a4e352c1bd0f191b6c23f03[m
+Author: Jesus Chavez <jhco1960@gmail.com>
+Date:   Sat May 7 14:55:26 2022 -0600
+
+    Login Container
+
+[33mcommit 570cff5161c0367b7928c5906714c7582d2e66ae[m
+Author: Jesus Chavez <jhco1960@gmail.com>
+Date:   Thu May 5 15:48:47 2022 -0600
+
+    Starting
+
+[33mcommit 840905245fe10561ba9c3a55781c4e644d323030[m
+Author: Jesus Chavez <jhco1960@gmail.com>
+Date:   Thu May 5 13:55:49 2022 -0600
+
+    Test
+
+[33mcommit cbdea041d70aff7b67dd5b7e23165bc221fca11c[m
+Author: Jesus Chavez <jhco1960@gmail.com>
+Date:   Thu May 5 12:01:10 2022 -0600
+
+    First Commit
+
+[33mcommit 704d1e35c7f8b03cd56351f8f9f526614a767518[m
+Author: Jesus Chavez <jhco1960@gmail.com>
+Date:   Wed May 4 23:36:53 2022 -0600
+
+    Initialize project using Create React App
+
+[33mcommit 2a4d8d0388a665146df7be563bd81c4d18aac94d[m
+Author: Humberto-C <72180767+Humberto-C@users.noreply.github.com>
+Date:   Sat Apr 16 16:47:01 2022 -0600
+
+    Update README.md
+
+[33mcommit b2e231770e8a167504111c6072b38022eef442f9[m
+Author: Humberto-C <72180767+Humberto-C@users.noreply.github.com>
+Date:   Sat Apr 16 16:44:57 2022 -0600
+
+    Initial commit

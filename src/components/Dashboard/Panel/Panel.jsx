@@ -8,38 +8,74 @@ import './panel.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 // Chart imports
-import { PureComponent } from 'react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
 
 
 const Panel = (props) => {
 
-    const [name, setName] = useState('');
-
+    const user = props.user;
+    const setUser = props.setUser;
+    const setAccounts = props.setAccounts;
+    const accounts = props.accounts;
     const isAuth = props.isAuth;
-    
+
+    const [newAccountCreated, setNewAccountCreated] = useState(false);
+
+    useEffect(() => {
+
+        getUserData();
+        getAccounts();
+        setNewAccountCreated(false);
+    }, [user.first_name, newAccountCreated]);
+
     // Chart Code
 
-    const getName = async () => {
+
+
+    const getUserData = async () => {
         try {
-            
-            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/dashboard`,{
+
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/dashboard`, {
                 method: 'GET',
                 headers: { token: localStorage.token }
             });
 
-            const parseRes = await response.json();
-            console.log(parseRes.first_name);
-            setName(parseRes.first_name);
+            let parseRes = await response.json();
+
+            if (parseRes === 'jwt expired') {
+                localStorage.removeItem('token');
+                isAuth(false)
+            }
+            setUser(parseRes[0]);
+
+            console.log(parseRes);
 
         } catch (error) {
-            console.error(error);
+            console.log(error.message);
         }
     }
 
-    useEffect(() => {
-        getName();
-    }, []);
+    const getAccounts = async () => {
+        try {
+
+            const data = await fetch(`${process.env.REACT_APP_BACKEND_URL}/dashboard/accounts`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    person: user.person,
+                }),
+            })
+
+            let parseRes = await data.json();
+            setAccounts(parseRes);
+            console.log(parseRes);
+
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
 
     const logout = (e) => {
         e.preventDefault();
@@ -94,13 +130,16 @@ const Panel = (props) => {
 
     return (
         <div className='main'>
-            <Header  logout={logout} user={name}/>
+            <Header logout={logout} name={user.first_name} />
             <Container className='accountsContainer'>
                 <Row className='accountsRow'>
-                    <Col xs={6} md='auto' lg='auto' className='cards'><Accountcard /></Col>
-                    <Col xs={6} md='auto' lg='auto' className='cards'><Accountcard /></Col>
-                    <Col xs={6} md='auto' lg='auto' className='cards'><Accountcard /></Col>
-                    <Col xs={6} md='auto' lg='auto' className='cards'><Accountcard plus /></Col>
+                    {accounts && accounts.map(account => <Col key={account.account} xs={6} md='auto' lg='auto' className='cards'><Accountcard account={account} /></Col>)}
+                    <Col xs={6} md='auto' lg='auto' className='cards'>
+                        <Accountcard plus
+                            person={user.person}
+                            setNewAccountCreated={setNewAccountCreated}
+                        />
+                    </Col>
                 </Row>
             </Container>
             <Container className='chartContainer'>

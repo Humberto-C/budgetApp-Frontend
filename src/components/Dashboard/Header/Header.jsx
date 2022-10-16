@@ -11,6 +11,7 @@ import './header.css';
 const Header = (props) => {
 
   const logout = props.logout;
+  
 
   return (
     <>
@@ -22,17 +23,17 @@ const Header = (props) => {
         <Navbar.Offcanvas backdrop={false}>
           <Offcanvas.Header className='justify-content-center'>
             <Offcanvas.Title>
-              <span>Welcome {props.user}</span>
+              <span>Welcome {props.name}</span>
             </Offcanvas.Title>
           </Offcanvas.Header>
           <Offcanvas.Body>
             <Nav>
               <div>
                 <Nav.Item>
-                  <Nav.Link><HomeIcon className='navIcons' />Dashboard</Nav.Link>
+                  <Nav.Link as={Link} to='/dashboard' ><HomeIcon className='navIcons' />Dashboard</Nav.Link>
                 </Nav.Item>
                 <Nav.Item>
-                  <Nav.Link><BriefcaseIcon className='navIcons' />Accounts</Nav.Link>
+                  <Nav.Link as={Link} to='/accounts' ><BriefcaseIcon className='navIcons' />Accounts</Nav.Link>
                 </Nav.Item>
               </div>
               <Nav.Item className='offCanvas_logout'>

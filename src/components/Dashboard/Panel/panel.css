@@ -2,7 +2,7 @@
 .main {
     height: auto;
     width: 100%;
-    background-color: lightblue;
+    /*background-color: lightblue;*/
     position: absolute;
     top: 60px;
 }

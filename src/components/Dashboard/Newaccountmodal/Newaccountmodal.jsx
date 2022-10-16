@@ -7,8 +7,9 @@ import Newaccountcard from './Newaccountcard/Newaccountcard';
 import './newaccountmodal.css';
 
 
-const Newaccountmodal = () => {
+const Newaccountmodal = (props) => {
     const [modalShow, setModalShow] = useState(false);
+    const setNewAccountCreated = props.setNewAccountCreated;
 
     return (
         <>
@@ -23,16 +24,21 @@ const Newaccountmodal = () => {
                 </Card>
             </Button>
 
-            <MyVerticalCenterModal 
+            <MyVerticalCenterModal
                 show={modalShow}
-                onHide={()=> setModalShow(false)}
+                onHide={() => setModalShow(false)}
                 backdrop='static'
+                person={props.person}
+                setNewAccountCreated={setNewAccountCreated}
             />
         </>
     );
 }
 
 const MyVerticalCenterModal = (props) => {
+    
+    const setNewAccountCreated= props.setNewAccountCreated;
+
     return (
         <Modal
             {...props}
@@ -46,11 +52,8 @@ const MyVerticalCenterModal = (props) => {
                 </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <Newaccountcard/>
+                <Newaccountcard onHide={props.onHide} person={props.person} setNewAccountCreated={setNewAccountCreated}/>
             </Modal.Body>
-            <Modal.Footer>
-                <Button onClick={props.onHide}>Close</Button>
-            </Modal.Footer>
         </Modal>
     );
 }
