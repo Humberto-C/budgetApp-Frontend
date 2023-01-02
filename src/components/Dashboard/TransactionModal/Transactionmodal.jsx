@@ -37,6 +37,8 @@ const Transactionmodal = (props) => {
 
 const MyVerticallyCenteredModal = (props) => {
 
+
+
     return (
         <Modal
             {...props}
@@ -44,39 +46,31 @@ const MyVerticallyCenteredModal = (props) => {
             aria-labelledby="contained-modal-title-vcenter"
             centered
         >
-            <Modal.Header className='modalHeader'>
+            {/* <Modal.Header className='modalHeader'>
                 <Modal.Title id="contained-modal-title-vcenter">
                     {props.account}
                 </Modal.Title>
-            </Modal.Header>
+            </Modal.Header> */}
             <Modal.Body>
                 <Tabs
-                    defaultActiveKey="add"
+                    defaultActiveKey="income"
                     className="mb-3 tabsModal"
                     fill
                 >
-                    <Tab eventKey="add" title="Income">
-                        <Transactioncard add />
+                    <Tab eventKey="income" title="Income">
+                        <Transactioncard income onHide={props.onHide} account={props.account}/>
                     </Tab>
                     <Tab eventKey="expense" title="Expense">
-                        <Transactioncard expense />
+                        <Transactioncard expense onHide={props.onHide} account={props.account}/>
                     </Tab>
                     <Tab eventKey="transfer" title="Transfer">
-                        <Transactioncard transfer />
+                        <Transactioncard transfer onHide={props.onHide} account={props.account}/>
                     </Tab>
                 </Tabs>
             </Modal.Body>
-            <Modal.Footer>
-                <Button onClick={props.onHide}>Close</Button>
-            </Modal.Footer>
         </Modal>
     );
 }
 
-// const Income = () => {
-//     return(
-
-//     );
-// }
 
 export default Transactionmodal;

@@ -8,10 +8,8 @@ import './accountcard.css'
 
 const Accountcard = (props) => {
 
-    const setNewAccountCreated = props.setNewAccountCreated;
-    const { plus, account, person } = props;
-
-    console.log(account, 'inside');
+    
+    const { plus, account, person, setNewAccountCreated } = props;
 
     if (plus) {
         return (
@@ -26,7 +24,7 @@ const Accountcard = (props) => {
         <Card className='cardAccount'>
             <Card.Header className='headerAccount'>
                 <span>{account.account_name}</span>
-                <Transactionmodal><DotsHorizontalIcon className='dotsIcon' /></Transactionmodal>
+                <Transactionmodal account={account}><DotsHorizontalIcon className='dotsIcon' /></Transactionmodal>
             </Card.Header>
             <Card.Body className='cardBodyAccount'>
                 <Card.Title className='text-center'> USD 110.00</Card.Title>

@@ -14,11 +14,11 @@ function App() {
 
   const [isAuth, setIsAuth] = useState(false);
   const [accounts, setAccounts] = useState(null);
-  const [user, setUser] = useState({
-    person: null,
-    first_name: '',
-    last_name: '',
-  });
+  // const [user, setUser] = useState({    Now we use context
+  //   person_id: null,
+  //   first_name: '',
+  //   last_name: '',
+  // });
 
   useEffect(() => {
     if (localStorage.token)
@@ -38,8 +38,8 @@ function App() {
               isAuth={setIsAuth}
               setAccounts={setAccounts}
               accounts={accounts}
-              user={user}
-              setUser={setUser}
+              // user={user}    Now we use context
+              // setUser={setUser}   Now we use context
             />
             : <Navigate to='/' />} />
         <Route path='/accounts'

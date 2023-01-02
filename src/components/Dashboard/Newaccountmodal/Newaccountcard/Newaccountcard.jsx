@@ -18,8 +18,8 @@ const Newaccountcard = ({ onHide, person, setNewAccountCreated }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+
         try {
-            
             const postAccount = await fetch(`${process.env.REACT_APP_BACKEND_URL}/dashboard/newaccount`,{
                 method: 'POST',
                 headers: {

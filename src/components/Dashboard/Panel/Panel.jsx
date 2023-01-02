@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -6,6 +6,9 @@ import Header from '../Header/Header';
 import Accountcard from '../Accountcard/Accountcard';
 import './panel.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { userInfo } from '../../../contexts/UserData';
+//import {  } from './'
+
 
 // Chart imports
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
@@ -13,11 +16,13 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts'
 
 const Panel = (props) => {
 
-    const user = props.user;
-    const setUser = props.setUser;
-    const setAccounts = props.setAccounts;
-    const accounts = props.accounts;
+    const { accounts, setAccounts, personId, setPersonId, userNames, setUserNames } = useContext(userInfo);
+    // const user = props.user;
+    // const setUser = props.setUser;
+    // const setAccounts = props.setAccounts;
+    // const accounts = props.accounts;
     const isAuth = props.isAuth;
+
 
     const [newAccountCreated, setNewAccountCreated] = useState(false);
 
@@ -26,7 +31,8 @@ const Panel = (props) => {
         getUserData();
         getAccounts();
         setNewAccountCreated(false);
-    }, [user.first_name, newAccountCreated]);
+        console.log(accounts);
+    }, [userNames.first_name, newAccountCreated]);
 
     // Chart Code
 
@@ -46,10 +52,12 @@ const Panel = (props) => {
                 localStorage.removeItem('token');
                 isAuth(false)
             }
-            setUser(parseRes[0]);
-
-            console.log(parseRes);
-
+            //setUser(parseRes[0]); deleted by context
+            const { person_id, first_name, last_name } = parseRes[0]
+            setUserNames({first_name, last_name});
+            setPersonId(person_id);
+            console.log(person_id, 'este es person_id', personId);
+            
         } catch (error) {
             console.log(error.message);
         }
@@ -64,13 +72,13 @@ const Panel = (props) => {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    person: user.person,
+                    person: personId,
                 }),
             })
 
             let parseRes = await data.json();
             setAccounts(parseRes);
-            console.log(parseRes);
+
 
         } catch (error) {
             console.log(error.message);
@@ -130,13 +138,14 @@ const Panel = (props) => {
 
     return (
         <div className='main'>
-            <Header logout={logout} name={user.first_name} />
+            <Header logout={logout} name={userNames.first_name} />
             <Container className='accountsContainer'>
                 <Row className='accountsRow'>
+                    {console.log(accounts, 'aqui vamos')}
                     {accounts && accounts.map(account => <Col key={account.account} xs={6} md='auto' lg='auto' className='cards'><Accountcard account={account} /></Col>)}
                     <Col xs={6} md='auto' lg='auto' className='cards'>
                         <Accountcard plus
-                            person={user.person}
+                            person={personId}
                             setNewAccountCreated={setNewAccountCreated}
                         />
                     </Col>
@@ -154,7 +163,7 @@ const Panel = (props) => {
                         </thead>
                         <tbody>
                             <tr>
-                                <td>John</td>
+                                <td>{userNames.first_name}</td>
                                 <td>Doe</td>
                                 <td>john@example.com</td>
                             </tr>

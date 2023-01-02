@@ -3,6 +3,7 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 const Signup = ({ isAuth }) => {
 
@@ -31,14 +32,14 @@ const Signup = ({ isAuth }) => {
             { ...prevState, [name]: value }
         ));
 
-        
+
     };
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        
+
         setNewUser(prevState => ({ ...prevState, 'validated': true }));
-        
+
 
         try {
 
@@ -61,15 +62,15 @@ const Signup = ({ isAuth }) => {
 
             const res = await req.json()
             console.log(res);
-            
 
-            if(res.token){
+
+            if (res.token) {
                 localStorage.setItem('token', res.token);
                 isAuth(true);
-            }else {
-                if(res.toLowerCase().includes('already exist')){
+            } else {
+                if (res.toLowerCase().includes('already exist')) {
                     setNewUser(prevState => (
-                        {...prevState, 'isNew': false}
+                        { ...prevState, 'isNew': false }
                     ))
                 }
             }
@@ -113,7 +114,7 @@ const Signup = ({ isAuth }) => {
                                     <Col>  {/* Password input */}
                                         <Form.Label>Password: </Form.Label>
                                         <Form.Control required name='password' type="password" pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,12}$" onChange={handleChange} />
-                                        <Form.Control.Feedback type="invalid">* Password characters min: 8, máx: 12{<br/>}and should have at least 1 special character, 1 capital letter and 1 number</Form.Control.Feedback>
+                                        <Form.Control.Feedback type="invalid">* Password characters min: 8, máx: 12{<br />}and should have at least 1 special character, 1 capital letter and 1 number</Form.Control.Feedback>
                                     </Col>
                                     <Col> {/* Confirm Password input */}
                                         <Form.Label>Confirm password: </Form.Label>
@@ -121,10 +122,14 @@ const Signup = ({ isAuth }) => {
                                         <Form.Control.Feedback type="invalid">* No match</Form.Control.Feedback>
                                     </Col>
                                 </Row>
-                                {!newUser.isNew && <Row className="text-center mt-5"><p>User already exist! {<br/>} Please use a valid email</p></Row>}
+                                {!newUser.isNew && <Row className="text-center mt-5"><p>User already exist! {<br />} Please use a valid email</p></Row>}
                                 <Stack className="mt-4 mb-3">
                                     <Button className="signUpButton" type="submit" variant="primary" >Sign Up</Button>
                                 </Stack>
+                                <div className="footerLogIn text-center">
+                                    <span>Already have an account!</span>
+                                    <Link className="m-2" to="/">Log in</Link>
+                                </div>
                             </Form>
                         </Card.Body>
                     </Card>
