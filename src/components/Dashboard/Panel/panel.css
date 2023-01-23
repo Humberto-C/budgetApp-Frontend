@@ -33,18 +33,23 @@
 }
 
 .chartContainer {
-    height: 30vh;
-    border: 2px solid black;
+    /* height: 30vh; */
+    /* border: 2px solid black; */
+    color: rgba(11, 93, 215, 0.9);
     margin: 10vh auto;
     padding: 16px;
     display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 20px;
+    box-shadow: 0 2px 5px 0 ;
 }
 
-.lastMovesContainer {
+/* .lastMovesContainer {
     width: 70%;
     height: 100%;
     border: 2px solid black;
-}
+} */
 
 /* .pieContainer {
     width: 30%;

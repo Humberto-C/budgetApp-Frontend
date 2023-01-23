@@ -12,7 +12,7 @@ import { ArrowRightIcon } from '@heroicons/react/solid';
 
 const Transactioncard = (props) => {
 
-    const { personId, accounts } = useContext(userInfo);
+    const { personId, accounts, setAccounts } = useContext(userInfo);
     const { income, expense, transfer, account } = props;
     const incomeCategories = getIncome();
     const expensesCategories = getExpenses();
@@ -22,99 +22,113 @@ const Transactioncard = (props) => {
         account_id: account.account_id,
         person_id: personId,
         category: 'Category',
+        tranferCategory: '',
         accountFrom: account.account_name,
         accountTo: 'Account',
     });
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (income) {
-            try {
-                const input = await fetch(`${process.env.REACT_APP_BACKEND_URL}/input`, {
+        try {
+            const input = await fetch(
+                `${process.env.REACT_APP_BACKEND_URL}/input`,
+                {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify({
-                        income: true,
-                        input_value: inputState.input_value * 1,
-                        account_id: account.account_id,
-                        person_id: personId,
-                        category: inputState.category,
-                    }),
-                })
+                    body: JSON.stringify(inputState),
+                }
+            );
 
-                const parseInput = await input.json();
-                console.log(parseInput);
+            console.log(input);
 
-
-            } catch (error) {
-                console.error(error.message);
-            }
+        } catch (error) {
+            console.error(error.message);
         }
 
-        if(expense){
-            try {
-                const input = await fetch(`${process.env.REACT_APP_BACKEND_URL}/input`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        expense: true,
-                        input_value: inputState.input_value * -1,
-                        account_id: account.account_id,
-                        person_id: personId,
-                        category: inputState.category,
-                    }),
-                })
-
-                const parseInput = await input.json();
-                console.log(parseInput);
-
-            } catch (error) {
-                console.error(error.message);
-            }
+        if(inputState.income){
+            setAccounts((prevState) => {
+                return prevState.map((x) => {
+                    if(x.account_id === account.account_id){                       
+                        return {...x, balance: parseInt(x.balance) + parseInt(inputState.input_value)}
+                    }
+                    return x;
+                });
+            });
         }
-
-        if(transfer){
-            try {
-                const input = await fetch(`${process.env.REACT_APP_BACKEND_URL}/input`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        transfer: true,
-                        input_value: inputState.input_value,
-                        account_id: account.account_id,
-                        person_id: personId,
-                        category: inputState.category,
-                    }),
-                })
-
-                const parseInput = await input.json();
-                console.log(parseInput);
-
-            } catch (error) {
-                console.error(error.message);
-            }
+        if(inputState.expense){
+            setAccounts((prevState) => {
+                return prevState.map((x) => {
+                    if(x.account_id === account.account_id){                       
+                        return {...x, balance: parseInt(x.balance) - parseInt(inputState.input_value)}
+                    }
+                    return x;
+                });
+            });
+        }
+        if(inputState.transfer){
+            setAccounts((prevState) => {
+                return prevState.map((x) => {
+                    if(x.account_id === account.account_id){                       
+                        return {...x, balance: parseInt(x.balance) - parseInt(inputState.input_value)}
+                    }
+                    return x;
+                });
+            });
+            setAccounts((prevState) => {
+                return prevState.map((x) => {
+                    if(x.account_id === inputState.accountTo_id){                       
+                        return {...x, balance: parseInt(x.balance) + parseInt(inputState.input_value)}
+                    }
+                    return x;
+                });
+            });
         }
 
         setInputState((prevState) => ({
             ...prevState,
             input_value: '',
             category: 'Category',
+            tranferCategory: '',
+            accountTo: 'Account',
         }));
         console.log(inputState);
-
+        
     }
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setInputState((prevState) => ({
-            ...prevState, [name]: value
-        }));
+        if (income) {
+            setInputState((prevState) => ({
+                ...prevState,
+                [name]: value,
+                income: true,
+            }));
+        }
+        if (expense) {
+            setInputState((prevState) => ({
+                ...prevState,
+                [name]: value,
+                expense: true,
+            }));
+        }
+        if (transfer) {            
+            if(name === 'accountTo'){
+                let acc = accounts.filter((x) => x.account_name === value);
+                setInputState((prevState) => ({
+                    ...prevState,
+                    accountTo_id: acc[0].account_id,
+                }))
+            }
+            setInputState((prevState) => ({
+                ...prevState,
+                [name]: value,
+                transfer: true,
+            }));
+        }
+
+
         console.log(inputState);
     };
 
@@ -194,7 +208,7 @@ const Transactioncard = (props) => {
                             </Col>
                         </Row>
                         <Row className='d-flex px-5 mt-4' >
-                            <Button className='mt-2' type='submit' onClick={handleSubmit}>Add Income</Button>
+                            <Button className='mt-2' type='submit' onClick={handleSubmit}>Add Expense</Button>
                             <Button className='mt-2' onClick={onHide}>Close</Button>
                         </Row>
                     </Form>
@@ -252,13 +266,16 @@ const Transactioncard = (props) => {
                             <Form.Group className='commentInput'>
                                 <Form.Control
                                     type='text'
-                                    placeholder='Comment'
+                                    placeholder='Comment/Category'
+                                    name='tranferCategory'
+                                    value={inputState.tranferCategory}
+                                    onChange={handleChange}
                                 >
                                 </Form.Control>
                             </Form.Group>
                         </Row>
                         <Row className='d-flex px-5 mt-4' >
-                            <Button className='mt-2' type='submit' onClick={handleSubmit}>Add Income</Button>
+                            <Button className='mt-2' type='submit' onClick={handleSubmit}>Make transfer</Button>
                             <Button className='mt-2' onClick={onHide}>Close</Button>
                         </Row>
                     </Form>

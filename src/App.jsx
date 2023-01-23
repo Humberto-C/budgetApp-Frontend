@@ -1,8 +1,9 @@
 import { Route, Routes, Navigate } from 'react-router-dom';
 import ThemeProvider from 'react-bootstrap/ThemeProvider';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './index.css';
+import { userInfo } from './contexts/UserData';
 
 /*Components*/
 import Login from "./components/Login/Login";
@@ -12,13 +13,9 @@ import Account from './components/Accounts/Account';
 
 function App() {
 
-  const [isAuth, setIsAuth] = useState(false);
-  const [accounts, setAccounts] = useState(null);
-  // const [user, setUser] = useState({    Now we use context
-  //   person_id: null,
-  //   first_name: '',
-  //   last_name: '',
-  // });
+  const { accounts, setAccounts, isAuth, setIsAuth } = useContext(userInfo);
+  // const [isAuth, setIsAuth] = useState(false);
+  
 
   useEffect(() => {
     if (localStorage.token)
@@ -36,8 +33,6 @@ function App() {
           element={isAuth ?
             <Panel
               isAuth={setIsAuth}
-              setAccounts={setAccounts}
-              accounts={accounts}
               // user={user}    Now we use context
               // setUser={setUser}   Now we use context
             />
