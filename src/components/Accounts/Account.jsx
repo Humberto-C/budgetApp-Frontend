@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import { Link } from 'react-router-dom';
 import { Button, Container } from "react-bootstrap";
 import Header from "../Dashboard/Header/Header";
 import { userInfo } from "../../contexts/UserData";
@@ -27,7 +28,7 @@ const Account = (props) => {
                             <tr key={account.account_id + 'acclist'}>
                                 {/* <th scope="row"><Button className='btn btn-link' variant='none'>Edit</Button></th> */}
                                 <td>{account.account_number || account.account}</td>
-                                <th scope="row"><Button className="btn btn-link" variant='none'>{userNames.first_name}</Button></th>
+                                <td><Link to={`/accounts/${account.account_id}`}>{account.account_name}</Link></td>
                                 <td>{account.balance}</td>
                                 <td>{account.currency}</td>
                             </tr>

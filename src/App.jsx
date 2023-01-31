@@ -10,16 +10,18 @@ import Login from "./components/Login/Login";
 import Signup from './components/Signup/Signup';
 import Panel from './components/Dashboard/Panel/Panel';
 import Account from './components/Accounts/Account';
+import AccountId from './components/Accounts/AccountId';
 
 function App() {
 
-  const { accounts, setAccounts, isAuth, setIsAuth } = useContext(userInfo);
+  const { accounts, setAccounts, isAuth, setIsAuth, getUserData, getAccounts } = useContext(userInfo);
   // const [isAuth, setIsAuth] = useState(false);
-  
+
 
   useEffect(() => {
-    if (localStorage.token)
+    if (localStorage.token){
       setIsAuth(true);
+    }
   }, []);
 
   return (
@@ -33,18 +35,17 @@ function App() {
           element={isAuth ?
             <Panel
               isAuth={setIsAuth}
-              // user={user}    Now we use context
-              // setUser={setUser}   Now we use context
+            // user={user}    Now we use context
+            // setUser={setUser}   Now we use context
             />
             : <Navigate to='/' />} />
         <Route path='/accounts'
-          element={isAuth
-            ? <Account isAuth={setIsAuth}
-              setAccounts={setAccounts}
-              accounts={accounts}
-            />
-            : <Navigate to='/' />}
+          element={
+            isAuth ? <Account isAuth={setIsAuth} setAccounts={setAccounts} accounts={accounts} />
+              : <Navigate to='/' />
+          }
         />
+        <Route path='accounts/:id' element={isAuth ? <AccountId/> : <Navigate to='/accounts' />} />        
         <Route path='*' element={<h1>There is nothing here yet...</h1>} />
       </Routes>
     </ThemeProvider>

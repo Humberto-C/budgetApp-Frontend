@@ -9,10 +9,12 @@ import Col from 'react-bootstrap/Col';
 import { Link } from "react-router-dom";
 
 
+
 const Login = (props) => {
 
     /* Variables */
     const isAuth = props.isAuth;
+    //const { getUserData, getAccounts } = useContext;
     const [user, setUser] = useState(
         {
             email: '',
@@ -52,6 +54,7 @@ const Login = (props) => {
             if (res.token) {
                 localStorage.setItem('token', res.token);
                 isAuth(true);
+                
             } else {
 
                 if (res.toLowerCase().includes('password')) {
@@ -65,6 +68,7 @@ const Login = (props) => {
                     ));
                 }
             }
+
 
 
 

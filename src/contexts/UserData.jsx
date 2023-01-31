@@ -12,7 +12,31 @@ export const DataContextProvider = (props) => {
     const [ accounts, setAccounts ] = useState([]);
     const [lastMovements, setLastMovements] = useState([]);
     const [isAuth, setIsAuth] = useState(false);
+    const [history, setHistory] = useState([]);
 
+    const getUserData = async () => {
+        try {
+
+            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/dashboard`, {
+                method: 'GET',
+                headers: { token: localStorage.token }
+            });
+
+            let parseRes = await response.json();
+
+            if (parseRes === 'jwt expired') {
+                localStorage.removeItem('token');
+                setIsAuth(false)
+            }
+            
+            const { person_id, first_name, last_name } = parseRes[0]
+            setUserNames({ first_name, last_name });
+            setPersonId(person_id);
+
+        } catch (error) {
+            console.log(error.message);
+        }
+    }
 
     const getAccounts = async () => {
         try {
@@ -71,6 +95,34 @@ export const DataContextProvider = (props) => {
         setIsAuth(false);
     };
     
+    const getHistory = async (acc, filter) => {
+        try {
+
+            let history = await fetch(`${process.env.REACT_APP_BACKEND_URL}/account-history`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'Application/json',
+                },
+                body: JSON.stringify({
+                    account_id: acc.account_id,
+                    person_id: personId,
+                    month: filter.month,
+                    year: filter.year,
+                }),
+            });
+
+            let parsedHistory = await history.json();
+
+            setHistory(parsedHistory);
+            console.log(parsedHistory, ' getHistory function');
+            console.log(history, 'console de history')
+
+        } catch (error) {
+
+            console.error(error.message);
+
+        }
+    };
 
     return (
         <userInfo.Provider value={
@@ -90,7 +142,10 @@ export const DataContextProvider = (props) => {
                 getAccNameFromId,
                 isAuth, 
                 setIsAuth,
-                logout
+                logout,
+                getUserData,
+                getHistory,
+                history,
             }
         }>
             {props.children}

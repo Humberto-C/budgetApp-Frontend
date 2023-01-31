@@ -11,7 +11,7 @@ import { userInfo } from '../../../contexts/UserData';
 
 
 // Chart imports
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
+//import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
 
 
 const Panel = (props) => {
@@ -29,6 +29,7 @@ const Panel = (props) => {
         getLast10movements,
         setIsAuth,
         logout,
+        getUserData
     } = useContext(userInfo);
     // const user = props.user;
     // const setUser = props.setUser;
@@ -50,30 +51,6 @@ const Panel = (props) => {
 
     // Chart Code
 
-    
-    const getUserData = async () => {
-        try {
-
-            const response = await fetch(`${process.env.REACT_APP_BACKEND_URL}/dashboard`, {
-                method: 'GET',
-                headers: { token: localStorage.token }
-            });
-
-            let parseRes = await response.json();
-
-            if (parseRes === 'jwt expired') {
-                localStorage.removeItem('token');
-                setIsAuth(false)
-            }
-            
-            const { person_id, first_name, last_name } = parseRes[0]
-            setUserNames({ first_name, last_name });
-            setPersonId(person_id);
-
-        } catch (error) {
-            console.log(error.message);
-        }
-    }
 
     const data = [
         {
@@ -152,7 +129,7 @@ const Panel = (props) => {
                                     <td>{getAccNameFromId(x.account_id)}</td>
                                     <td>{x.category}</td>
                                     <td>{x.input_value}</td>
-                                    <td>{x.add_date}</td>
+                                    <td>{x.add_date.replace(/T|.000Z/g, ' ')}</td>
                                 </tr>
                             })}
                         </tbody>

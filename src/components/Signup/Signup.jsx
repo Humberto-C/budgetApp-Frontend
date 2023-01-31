@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 
 const Signup = ({ isAuth }) => {
 
+    //const { getUserData, getAccounts } = useContext;
     const [newUser, setNewUser] = useState({
         isNew: true,
         validated: false,

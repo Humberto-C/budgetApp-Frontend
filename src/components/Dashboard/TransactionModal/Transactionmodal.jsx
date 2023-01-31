@@ -18,12 +18,13 @@ import { userInfo } from '../../../contexts/UserData';
 const Transactionmodal = (props) => {
 
     /* Variables and functions from Context */
-    const { getLast10movements } = useContext(userInfo);
+    const { getLast10movements, getHistory } = useContext(userInfo);
     const account = props.account;
     const [modalShow, setModalShow] = useState(false);
     const handleHide = () => {
         setModalShow(false);
         getLast10movements();
+        getHistory(account);
     }
 
     return (

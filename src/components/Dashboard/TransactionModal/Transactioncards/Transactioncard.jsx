@@ -25,10 +25,12 @@ const Transactioncard = (props) => {
         tranferCategory: '',
         accountFrom: account.account_name,
         accountTo: 'Account',
+        validated: false,
     });
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        
         try {
             const input = await fetch(
                 `${process.env.REACT_APP_BACKEND_URL}/input`,
@@ -41,7 +43,19 @@ const Transactioncard = (props) => {
                 }
             );
 
-            console.log(input);
+            const parsedInput = await input.json();
+
+            console.log(parsedInput);
+
+            if(parsedInput === 'Transfer Category/Comment Can Not be empty!'){
+                setInputState((prevState) => ({
+                    ...prevState,
+                    validated: true,
+                }));
+                return console.log(input);
+            }
+
+            
 
         } catch (error) {
             console.error(error.message);
@@ -149,6 +163,7 @@ const Transactioncard = (props) => {
                                         onChange={handleChange}
                                     >
                                     </Form.Control>
+
                                 </Form.Group>
                             </Col>
                         </Row>
@@ -220,7 +235,7 @@ const Transactioncard = (props) => {
         return (
             <Card className="transferCard">
                 <Card.Body>
-                    <Form>
+                    <Form noValidate validated={inputState.validated}>
                         <Row className='mb-3'>
                             <Col>
                                 <Form.Group className='amountGroup'>
@@ -270,8 +285,10 @@ const Transactioncard = (props) => {
                                     name='tranferCategory'
                                     value={inputState.tranferCategory}
                                     onChange={handleChange}
+                                    required
                                 >
                                 </Form.Control>
+                                <Form.Control.Feedback type='invalid'>Category/Comment CAN NOT be empty</Form.Control.Feedback>
                             </Form.Group>
                         </Row>
                         <Row className='d-flex px-5 mt-4' >
